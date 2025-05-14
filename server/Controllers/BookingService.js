@@ -59,7 +59,7 @@ exports.BookService = async(req , res) =>{
 
     }
     catch(err){
-        console.log(`Internal Server Error: ${err}`)
+       
         return res.status(500).json({success:false,message:`Internal Server Error: ${err.message}`,statuscode:500})
     }
 }

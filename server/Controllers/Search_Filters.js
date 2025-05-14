@@ -13,7 +13,7 @@ exports.getproductsbytitle = async(req,res) =>{
     return res.status(200).json({success:false,message:'services is found',statuscode:200,services})
 }
 exports.getproductsbyprice = async(req,res)=>{
-    let{maxprice,minprice} = req.body 
+    let{maxprice,minprice} = req.body
     if(!maxprice || !minprice){
         return res.status(400).json({success:false,message:'Please fill the max min prices'})
     }
@@ -21,11 +21,11 @@ exports.getproductsbyprice = async(req,res)=>{
     maxprice = parseFloat(maxprice)
     const query = {price: { $gte: minprice, $lte: maxprice }}
     const services = await ServiceModel.find(query)
-    return res.status(200).json({success:false,message:'services are filter by the prices',statuscode:200,services})
+    return res.status(200).json({success:true,message:'services are filter by the prices',statuscode:200,services})
 }
 exports.getservicesbyrating = async(req,res)=>{
     try{
-        const services = await ServiceModel.find().sort({avgrating: -1})
+        const services = await ServiceModel.find().sort({avgrating:-1})
         if(services.length === 0){
             return res.status(400).json({success:false,message: 'no services found',statuscode: 400})
         }

@@ -26,7 +26,7 @@ exports.addcoupon = async(req,res)=>{
             expiredate,
             minimumamount
         })
-        return res.status(200).json({success:true,message:'Coupon is added Successflly',statuscode:true,addcoupon})
+        return res.status(200).json({success:true,message:'Coupon is added Successfully',statuscode:true,addcoupon})
 
     }
     catch(err){

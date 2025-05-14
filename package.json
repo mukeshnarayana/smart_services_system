@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "admin": "nodemon admin.js"
+    "admin": "nodemon admin.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,12 @@
     "node-cron": "^3.0.3",
     "nodemailer": "^6.10.1",
     "nodemon": "^3.1.10",
+    "path-to-regexp": "^8.2.0",
+    "supertest": "^7.1.0",
     "swagger-ui-express": "^5.0.1",
     "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

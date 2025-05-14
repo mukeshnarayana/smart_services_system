@@ -58,7 +58,7 @@ exports.resendotp = async(req,res)=>{
     try{
         const {email} = req.body
         if(!email){
-            return res.status(400).json({success:false,message:'Please fill all the fields',statuscose:400})
+            return res.status(400).json({success:false,message:'Please fill all the field',statuscose:400})
         }
         const user = await UserModel.findOne({email})
         if(!user){
