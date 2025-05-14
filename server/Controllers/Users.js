@@ -251,27 +251,31 @@ exports.getuser = async(req,res)=>{
     }
 } 
 exports.updateprofile = async(req,res)=>{
-    try{
-        const{token} = req.headers 
+   try{
+        const{token} = req.headers
         if(!token){
             return res.status(400).json({success:false,message:'Please fill all the fields',statuscode:400})
         }
-        const decoded = await middle.decodetoken(token)
-        const user = await UserModel.findOne({email:decoded})
-        if(!user){
-            return res.status(400).json({success:false,message:'User not found',statuscode:400})
+        else{
+            const decoded = await middle.decodetoken(token)
+            const user = await UserModel.findOne({email: decoded})
+            if(!user){
+                return res.status(400).json({success:false,message:'User not found',statuscode:400})
+            }
+            else{
+                await UserModel.findOneAndUpdate(
+                    {email:decoded},
+                    {$set: req.body},
+                    {new: true}
+                )
+                return res.status(200).json({success:true,message:'User updated successfully',statuscode:200})
+            }
         }
-        await UserModel.findOneAndUpdate(
-            { email:decoded },
-            { $set: req.body},
-            { new: true }
-        )
-        return res.status(200).json({success:true,message:'User updated successfully',statuscode:200})      
-    }
-    catch(err){
-        console.log(`Error in internal server: ${err}`)
-        return res.status(500).json({ success:false,message: `Internal Server Error: ${err}`,statuscode:500})
-    }
+   }
+   catch(err){
+       console.log(`Error in internal server: ${err}`)
+       return res.status(500).json({success:false,message: `Internal Server Error: ${err}`,statuscode:500})
+   }
 }
 exports.logout = async(req,res)=>{
     try{
